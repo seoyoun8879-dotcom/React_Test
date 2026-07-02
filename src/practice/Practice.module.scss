@@ -1,0 +1,51 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  overflow: auto;
+
+  .content {
+    // display: grid;
+    // place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 500px;
+    padding: 20px;
+    border: 1px solid #000;
+
+    &.component-and-state {
+      // display: flex;
+      // flex-direction: column;
+      // gap: 15px;
+    }
+
+    .test-title {
+      font-size: 17px;
+      margin: 0;
+      padding-bottom: 15px;
+    }
+
+    .reset-btn {
+      display: grid;
+      place-items: center;
+      width: 100px;
+      height: 36px;
+      background-color: #424242;
+      border-radius: 50px;
+      font-size: 15px;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.5s ease;
+
+      &:hover {
+        background: #000;
+      }
+    }
+  }
+}

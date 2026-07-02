@@ -1,0 +1,81 @@
+* {
+  font-family: "Inter";
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+
+  .btn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 300px;
+    height: 70px;
+    border: 5px solid #8d8d8d;
+    border-radius: 10px;
+    font-size: 25px;
+    font-weight: 600;
+    color: #8d8d8d;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -60px;
+      transform: translateY(-50%);
+      border-top: 17px solid transparent;
+      border-bottom: 17px solid transparent;
+      border-left: 25px solid #8d8d8d;
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+
+    &:hover {
+      &::after {
+        left: -50px;
+        opacity: 1;
+      }
+    }
+
+    &.practice {
+      &:hover {
+        border-color: #fff;
+        color: #fff;
+
+        &::after {
+          border-left-color: #fff;
+        }
+      }
+    }
+
+    &.layout-test {
+      &:hover {
+        border-color: #ffeb39;
+        color: #ffeb39;
+
+        &::after {
+          border-left-color: #ffeb39;
+        }
+      }
+    }
+
+    &.component-test {
+      &:hover {
+        border-color: #a9ff39;
+        color: #a9ff39;
+
+        &::after {
+          border-left-color: #a9ff39;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 200px;
+  height: 50px;
+  background-color: #d8d8d8;
+  border-radius: 50px;
+  color: #464646;
+  font-weight: 500;
+  cursor: pointer;
+
+  &.disable {
+    color: #fff;
+    pointer-events: none;
+  }
+
+  p {
+    font-size: 18px;
+    margin: 0;
+  }
+}
