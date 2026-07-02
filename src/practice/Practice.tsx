@@ -5,6 +5,8 @@ import CheckList from "./components/TodoList/CheckList";
 import style from "./Practice.module.scss";
 
 function Practice() {
+
+  // 컴포넌트 & 상태관리
   const [count, setCount] = useState([0, 0, 0]);
 
   const handleButtonClickCount = (idx: number) => {
@@ -15,6 +17,7 @@ function Practice() {
     setCount([0, 0, 0]);
   };
 
+  // Todo List
   const [inputCompleted, setInputCompleted] = useState(false);
   const [todos, setTodos] = useState([{ text: "", priority: "하" }]);
 
@@ -36,6 +39,8 @@ function Practice() {
 
   return (
     <div className={style.container}>
+
+      {/* 컴포넌트 & 상태관리 */}
       <div className={`${style.content} ${style["component-and-state"]}`}>
         <p className={style["test-title"]}>컴포넌트 & 상태관리</p>
 
@@ -48,6 +53,7 @@ function Practice() {
         </div>
       </div>
 
+      {/* Todo List */}
       <div className={`${style.content} ${style["todo-list"]}`}>
         <div className={style["list-conetnt"]}>
           <p className={style["test-title"]}>Todo List</p>
@@ -91,6 +97,13 @@ function Practice() {
           {inputCompleted ? "새 Todo 작성" : "완료"}
         </div>
       </div>
+      <div className={`${style.content} ${style[""]}`}></div>
+      <div className={`${style.content} ${style[""]}`}></div>
+      <div className={`${style.content} ${style[""]}`}></div>
+      <div className={`${style.content} ${style[""]}`}></div>
+      <div className={`${style.content} ${style[""]}`}></div>
+      <div className={`${style.content} ${style[""]}`}></div>
+      <div className={`${style.content} ${style[""]}`}></div>
     </div>
   );
 }
