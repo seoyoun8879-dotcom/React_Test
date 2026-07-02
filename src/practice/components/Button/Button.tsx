@@ -13,7 +13,7 @@ function Button({ clickCount, onClick, isEnd }: ButtonType) {
       onClick={onClick}
     >
       {isEnd ? (
-        <p className={style.text}>Cannot click</p>
+        <p className={style.text}>Cannot click (Total count: {clickCount})</p>
       ) : (
         <>
           <p className={style.text}>Click here</p>
