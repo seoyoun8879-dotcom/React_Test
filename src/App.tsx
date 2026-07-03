@@ -1,13 +1,10 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./home/Home";
-import Practice from "./practice/Practice";
-import ComponentTest from "./component_test/ComponentTest";
-import LayoutTest from "./layout_test/LayoutTest";
+import Home from "./pages/home/Home";
+import Practice from "./pages/practice/Practice";
+import ComponentTest from "./pages/component_test/ComponentTest";
+import LayoutTest from "./pages/layout_test/LayoutTest";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>

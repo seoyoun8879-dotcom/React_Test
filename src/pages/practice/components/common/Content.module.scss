@@ -1,0 +1,24 @@
+.content {
+  // display: grid;
+  // place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 500px;
+  padding: 20px;
+  border: 1px solid #000;
+
+  &.component-and-state {
+    // display: flex;
+    // flex-direction: column;
+    // gap: 15px;
+  }
+
+  &.todo-list {
+    justify-content: space-between;
+  }
+}

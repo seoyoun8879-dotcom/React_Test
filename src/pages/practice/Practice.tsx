@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Content from "./components/common/Content";
 import Button from "./components/Button/Button";
 import TodoList from "./components/TodoList/TodoList";
 import CheckList from "./components/TodoList/CheckList";
@@ -59,7 +60,7 @@ function Practice() {
   return (
     <div className={style.container}>
       {/* 컴포넌트 & 상태관리 */}
-      <div className={`${style.content} ${style["component-and-state"]}`}>
+      <Content secondClass="component-and-state">
         <p className={style["test-title"]}>컴포넌트 & 상태관리</p>
 
         <Button
@@ -84,10 +85,9 @@ function Practice() {
         >
           RESET
         </div>
-      </div>
-
+      </Content>
       {/* Todo List */}
-      <div className={`${style.content} ${style["todo-list"]}`}>
+      <Content secondClass="todo-list">
         <div className={style["list-conetnt"]}>
           <p className={style["test-title"]}>Todo List</p>
 
@@ -148,14 +148,15 @@ function Practice() {
             완료
           </div>
         )}
-      </div>
-      <div className={`${style.content} ${style[""]}`}></div>
-      <div className={`${style.content} ${style[""]}`}></div>
-      <div className={`${style.content} ${style[""]}`}></div>
-      <div className={`${style.content} ${style[""]}`}></div>
-      <div className={`${style.content} ${style[""]}`}></div>
-      <div className={`${style.content} ${style[""]}`}></div>
-      <div className={`${style.content} ${style[""]}`}></div>
+      </Content>
+
+      <Content secondClass=""></Content>
+      <Content secondClass=""></Content>
+      <Content secondClass=""></Content>
+      <Content secondClass=""></Content>
+      <Content secondClass=""></Content>
+      <Content secondClass=""></Content>
+      <Content secondClass=""></Content>
     </div>
   );
 }
