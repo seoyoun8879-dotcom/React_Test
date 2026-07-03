@@ -1,12 +1,19 @@
 import { useState } from "react";
+// common
 import Content from "./components/common/Content";
-import Button from "./components/Button/Button";
-import TodoList from "./components/TodoList/TodoList";
-import CheckList from "./components/TodoList/CheckList";
+
+// 버튼 클릭 상태관리
+import Button from "./components/Button/Button"; // component
+
+// Todo List
+import TodoList from "./components/TodoList/TodoList"; // component
+import CheckList from "./components/TodoList/CheckList"; // component
+import useTodoList from "./hooks/useTodoList"; // hook
+
 import style from "./Practice.module.scss";
 
 function Practice() {
-  // 컴포넌트 & 상태관리
+  // 컴포넌트 & 상태관리 hooks
   const [count, setCount] = useState([0, 0, 0]);
 
   const handleButtonClickCount = (idx: number) => {
@@ -17,45 +24,17 @@ function Practice() {
     setCount([0, 0, 0]);
   };
 
-  // Todo List
-  const [inputCompleted, setInputCompleted] = useState(false);
-  const [todos, setTodos] = useState([
-    { text: "", priority: "하", checked: false },
-  ]);
-
-  const handleAddTodoItem = () => {
-    setTodos((prev) => [...prev, { text: "", priority: "하", checked: false }]);
-  };
-
-  const handleChangeTodo = (
-    idx: number,
-    field: "text" | "priority",
-    value: string,
-  ) => {
-    setTodos((prev) =>
-      prev.map((todo, i) => (i === idx ? { ...todo, [field]: value } : todo)),
-    );
-  };
-
-  const handleListEmptyCheck = () => {
-    const filteredTodos = todos.filter((todo) => todo.text.trim() !== "");
-
-    if (filteredTodos.length === 0) {
-      alert("작성된 목록이 없습니다");
-      return;
-    }
-
-    setTodos(filteredTodos);
-    setInputCompleted((prev) => !prev);
-  };
-
-  const handleToggleCheck = (idx: number) => {
-    setTodos((prev) =>
-      prev.map((todo, i) =>
-        i === idx ? { ...todo, checked: !todo.checked } : todo,
-      ),
-    );
-  };
+  // Todo List hooks
+  const {
+    todos,
+    inputCompleted,
+    handleAddTodoItem,
+    handleChangeTodo,
+    handleListEmptyCheck,
+    handleToggleCheck,
+    handleResetTodos,
+    handleEditTodos,
+  } = useTodoList();
 
   return (
     <div className={style.container}>
@@ -125,21 +104,10 @@ function Practice() {
 
         {inputCompleted ? (
           <div className={style["option-btn-box"]}>
-            <div
-              className={style["option-btn"]}
-              onClick={() => {
-                setTodos([{ text: "", priority: "하", checked: false }]);
-                setInputCompleted((prev) => !prev);
-              }}
-            >
+            <div className={style["option-btn"]} onClick={handleResetTodos}>
               새 TODO 작성
             </div>
-            <div
-              className={style["option-btn"]}
-              onClick={() => {
-                setInputCompleted((prev) => !prev);
-              }}
-            >
+            <div className={style["option-btn"]} onClick={handleEditTodos}>
               수정
             </div>
           </div>
