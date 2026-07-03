@@ -1,0 +1,125 @@
+.check-list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  height: 40px;
+  padding: 0 15px;
+  border-bottom: 1px solid #00000021;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &.high {
+    &::after {
+      background: linear-gradient(
+        to right,
+        #ff000000 0%,
+        #ff000013 40%,
+        #ff000013 60%,
+        #ff000000 100%
+      );
+    }
+
+    &:hover {
+      border-bottom-color: #ff00001f;
+    }
+  }
+
+  &.middle {
+    &::after {
+      background: linear-gradient(
+        to right,
+        #ffc40000 0%,
+        #ffc4001f 40%,
+        #ffc4001f 60%,
+        #ffc40000 100%
+      );
+    }
+
+    &:hover {
+      border-bottom-color: #ffc4002a;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    width: 0;
+    background: linear-gradient(
+      to right,
+      #00000000 0%,
+      #00000008 40%,
+      #00000008 60%,
+      #00000000 100%
+    );
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
+
+  .label-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    input {
+      display: none;
+
+      &:checked + i {
+        border-color: #2baaff;
+        &::after {
+          animation: check-pop 0.25s ease-out;
+          display: block;
+          border-color: #2baaff;
+        }
+      }
+    }
+
+    i {
+      position: relative;
+      width: 15px;
+      height: 15px;
+      border: 1px solid #000;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 46%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(315deg);
+        display: none;
+        width: 7px;
+        height: 4px;
+        border-left: 2px solid #000;
+        border-bottom: 2px solid #000;
+      }
+    }
+
+    @keyframes check-pop {
+      0% {
+        transform: translate(-50%, -50%) rotate(315deg) scale(0.8);
+      }
+
+      50% {
+        transform: translate(-50%, -50%) rotate(315deg) scale(0.5);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) rotate(315deg) scale(1);
+      }
+    }
+  }
+
+  .priority {
+    font-size: 12px;
+  }
+}

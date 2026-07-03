@@ -5,7 +5,6 @@ import CheckList from "./components/TodoList/CheckList";
 import style from "./Practice.module.scss";
 
 function Practice() {
-
   // 컴포넌트 & 상태관리
   const [count, setCount] = useState([0, 0, 0]);
 
@@ -19,36 +18,70 @@ function Practice() {
 
   // Todo List
   const [inputCompleted, setInputCompleted] = useState(false);
-  const [todos, setTodos] = useState([{ text: "", priority: "하" }]);
+  const [todos, setTodos] = useState([
+    { text: "", priority: "하", checked: false },
+  ]);
 
   const handleAddTodoItem = () => {
-    setTodos((prev) => [...prev, { text: "", priority: "하" }]);
+    setTodos((prev) => [...prev, { text: "", priority: "하", checked: false }]);
   };
 
   const handleChangeTodo = (
     idx: number,
     field: "text" | "priority",
-    value: string
+    value: string,
   ) => {
     setTodos((prev) =>
+      prev.map((todo, i) => (i === idx ? { ...todo, [field]: value } : todo)),
+    );
+  };
+
+  const handleListEmptyCheck = () => {
+    const filteredTodos = todos.filter((todo) => todo.text.trim() !== "");
+
+    if (filteredTodos.length === 0) {
+      alert("작성된 목록이 없습니다");
+      return;
+    }
+
+    setTodos(filteredTodos);
+    setInputCompleted((prev) => !prev);
+  };
+
+  const handleToggleCheck = (idx: number) => {
+    setTodos((prev) =>
       prev.map((todo, i) =>
-        i === idx ? { ...todo, [field]: value } : todo
-      )
+        i === idx ? { ...todo, checked: !todo.checked } : todo,
+      ),
     );
   };
 
   return (
     <div className={style.container}>
-
       {/* 컴포넌트 & 상태관리 */}
       <div className={`${style.content} ${style["component-and-state"]}`}>
         <p className={style["test-title"]}>컴포넌트 & 상태관리</p>
 
-        <Button clickCount={count[0]} onClick={() => handleButtonClickCount(0)} isEnd={count[0] >= 5} />
-        <Button clickCount={count[1]} onClick={() => handleButtonClickCount(1)} isEnd={count[1] >= 5} />
-        <Button clickCount={count[2]} onClick={() => handleButtonClickCount(2)} isEnd={count[2] >= 5} />
+        <Button
+          clickCount={count[0]}
+          onClick={() => handleButtonClickCount(0)}
+          isEnd={count[0] >= 5}
+        />
+        <Button
+          clickCount={count[1]}
+          onClick={() => handleButtonClickCount(1)}
+          isEnd={count[1] >= 5}
+        />
+        <Button
+          clickCount={count[2]}
+          onClick={() => handleButtonClickCount(2)}
+          isEnd={count[2] >= 5}
+        />
 
-        <div className={style["reset-btn"]} onClick={handleButtonClickCountReset}>
+        <div
+          className={style["reset-btn"]}
+          onClick={handleButtonClickCountReset}
+        >
           RESET
         </div>
       </div>
@@ -71,9 +104,10 @@ function Practice() {
             {inputCompleted &&
               todos.map((todo, idx) => (
                 <CheckList
-                  key={idx}
                   checkItem={todo.text}
                   priority={todo.priority}
+                  isChecked={todo.checked}
+                  onCheck={() => handleToggleCheck(idx)}
                 />
               ))}
 
@@ -89,13 +123,31 @@ function Practice() {
           </div>
         </div>
 
-        <div
-          className={style["complete-btn"]}
-          style={{ display: todos.length >= 5 ? "grid" : "none" }}
-          onClick={() => setInputCompleted((prev) => !prev)}
-        >
-          {inputCompleted ? "새 Todo 작성" : "완료"}
-        </div>
+        {inputCompleted ? (
+          <div className={style["option-btn-box"]}>
+            <div
+              className={style["option-btn"]}
+              onClick={() => {
+                setTodos([{ text: "", priority: "하", checked: false }]);
+                setInputCompleted((prev) => !prev);
+              }}
+            >
+              새 TODO 작성
+            </div>
+            <div
+              className={style["option-btn"]}
+              onClick={() => {
+                setInputCompleted((prev) => !prev);
+              }}
+            >
+              수정
+            </div>
+          </div>
+        ) : (
+          <div className={style["option-btn"]} onClick={handleListEmptyCheck}>
+            완료
+          </div>
+        )}
       </div>
       <div className={`${style.content} ${style[""]}`}></div>
       <div className={`${style.content} ${style[""]}`}></div>

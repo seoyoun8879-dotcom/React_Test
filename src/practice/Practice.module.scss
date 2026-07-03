@@ -57,11 +57,16 @@
         }
       }
 
-      .complete-btn {
+      .option-btn-box {
+        display: flex;
+        gap: 10px;
+      }
+
+      .option-btn {
         display: grid;
         place-items: center;
         height: 36px;
-        padding : 0 30px;
+        padding: 0 30px;
         background-color: #424242;
         border-radius: 50px;
         font-size: 15px;
