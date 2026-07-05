@@ -4,6 +4,7 @@ import Content from "./components/common/Content";
 
 // 버튼 클릭 상태관리
 import Button from "./components/Button/Button"; // component
+import useButtonClickState from "./hooks/useButtonClickState"; // hook
 
 // Todo List
 import TodoList from "./components/TodoList/TodoList"; // component
@@ -13,18 +14,15 @@ import useTodoList from "./hooks/useTodoList"; // hook
 import style from "./Practice.module.scss";
 
 function Practice() {
-  // 컴포넌트 & 상태관리 hooks
-  const [count, setCount] = useState([0, 0, 0]);
 
-  const handleButtonClickCount = (idx: number) => {
-    setCount((prev) => prev.map((count, i) => (i === idx ? count + 1 : count)));
-  };
+  // 버튼 클릭 상태관리 hooks
+  const {
+    count,
+    handleButtonClickCount,
+    handleButtonClickCountReset
+  } = useButtonClickState();
 
-  const handleButtonClickCountReset = () => {
-    setCount([0, 0, 0]);
-  };
-
-  // Todo List hooks
+  // Todo List 상태관리 hooks
   const {
     todos,
     inputCompleted,
