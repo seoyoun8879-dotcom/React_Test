@@ -1,29 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import Button from "./components/Button";
 import style from "./Home.module.scss";
 
 function Home() {
-  const navigate = useNavigate();
-
   return (
     <div className={style.container}>
-      <div
-        className={`${style.btn} ${style.practice}`}
-        onClick={() => navigate("/practice")}
-      >
-        Practice
-      </div>
-      <div
-        className={`${style.btn} ${style["layout-test"]}`}
-        onClick={() => navigate("/layout-test")}
-      >
-        Layout Test
-      </div>
-      <div
-        className={`${style.btn} ${style["component-test"]}`}
-        onClick={() => navigate("//component-test")}
-      >
-        Component Test
-      </div>
+      <Button
+        subClass="practice"
+        text="Practice"
+      />
+      <Button
+        subClass="layout-test"
+        text="Layout Test"
+      />
+      <Button
+        subClass="component-test"
+        text="Component Test"
+      />
     </div>
   );
 }
