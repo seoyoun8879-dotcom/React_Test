@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 // common
 import Content from "./components/common/Content";
 
@@ -11,16 +11,17 @@ import TodoList from "./components/TodoList/TodoList"; // component
 import CheckList from "./components/TodoList/CheckList"; // component
 import useTodoList from "./hooks/useTodoList"; // hook
 
+// Today Weather
+import CurrentWeather from "./components/TodayWeather/CurrentWeather"; // component
+import HourWeatherItem from "./components/TodayWeather/HourWeatherItem"; // component
+import useTodayWeather from "./hooks/useTodayWeather"; // hook
+
 import style from "./Practice.module.scss";
 
 function Practice() {
-
   // 버튼 클릭 상태관리 hooks
-  const {
-    count,
-    handleButtonClickCount,
-    handleButtonClickCountReset
-  } = useButtonClickState();
+  const { count, handleButtonClickCount, handleButtonClickCountReset } =
+    useButtonClickState();
 
   // Todo List 상태관리 hooks
   const {
@@ -34,12 +35,19 @@ function Practice() {
     handleEditTodos,
   } = useTodoList();
 
+  const { location, currentWeather, hourlyWeather, loading, error } =
+    useTodayWeather();
+
+  const temps = hourlyWeather.map((weather) => weather.temp);
+  const maxTemp = temps.length ? Math.max(...temps) : 0;
+  const minTemp = temps.length ? Math.min(...temps) : 0;
+  const middleTemp = (maxTemp + minTemp) / 2;
+
   return (
     <div className={style.container}>
       {/* 컴포넌트 & 상태관리 */}
       <Content secondClass="component-and-state">
         <p className={style["test-title"]}>컴포넌트 & 상태관리</p>
-
         <Button
           clickCount={count[0]}
           onClick={() => handleButtonClickCount(0)}
@@ -55,7 +63,6 @@ function Practice() {
           onClick={() => handleButtonClickCount(2)}
           isEnd={count[2] >= 5}
         />
-
         <div
           className={style["reset-btn"]}
           onClick={handleButtonClickCountReset}
@@ -63,6 +70,7 @@ function Practice() {
           RESET
         </div>
       </Content>
+
       {/* Todo List */}
       <Content secondClass="todo-list">
         <div className={style["list-conetnt"]}>
@@ -116,7 +124,40 @@ function Practice() {
         )}
       </Content>
 
-      <Content secondClass=""></Content>
+      <Content secondClass="today-weather">
+        <p className={style["test-title"]}>오늘의 날씨</p>
+        <div className={style["weather-panel"]}>
+          {loading ? (
+            <p>날씨를 불러오는 중입니다 . . .</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : currentWeather ? (
+            <div className={style["weather-display"]}>
+              <CurrentWeather
+                location={location}
+                imgSrc={currentWeather.image}
+                temp={Math.round(currentWeather.temp)}
+              />
+              <div className={style["hour-info"]}>
+                {hourlyWeather.map((weather, _) => (
+                  <HourWeatherItem
+                    hour={
+                      weather.isCurrent
+                        ? "지금"
+                        : `${new Date(weather.time).getHours()}시`
+                    }
+                    img={weather.image}
+                    temp={Math.round(weather.temp)}
+                    middleTemp={middleTemp}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p>날씨 정보가 없습니다.</p>
+          )}
+        </div>
+      </Content>
       <Content secondClass=""></Content>
       <Content secondClass=""></Content>
       <Content secondClass=""></Content>

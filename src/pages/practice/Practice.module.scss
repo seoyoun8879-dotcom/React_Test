@@ -80,4 +80,30 @@
       background: #000;
     }
   }
+
+  .weather-panel {
+    display: grid;
+    place-items: center;
+    height: 370px;
+    padding-bottom: 18px;
+
+    .weather-display {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+
+      p {
+        margin: 0;
+      }
+
+      .hour-info {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 80px;
+      }
+    }
+  }
 }

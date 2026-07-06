@@ -1,0 +1,39 @@
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .point-hour {
+      font-size: 13px;
+    }
+
+    .point-img {
+      width: 35px;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .point-temp {
+      font-size: 13px;
+    }
+
+    .point {
+      width: 6px;
+      height: 6px;
+      background-color: #424242;
+      border-radius: 10px;
+    }
+  }
+}
